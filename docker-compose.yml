@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:latest
+    container_name: isupet-db
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=isupet
+      - POSTGRES_USER=isupet
+      - POSTGRES_PASSWORD=isupet
+    ports:
+      - 5432:5432
+
+  app:
+    build: webapp/golang
+    container_name: isupet
+    environment:
+      - APP_PORT=${APP_PORT}
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    depends_on:
+      - db
