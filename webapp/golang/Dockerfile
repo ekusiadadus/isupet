@@ -1,4 +1,4 @@
-FROM golang:1.21
+FROM golang:1.27
 
 RUN mkdir -p /home/webapp
 WORKDIR /home/webapp
